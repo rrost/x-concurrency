@@ -6,8 +6,6 @@ Licensed under the MIT License, 2014-2015.<br>
 
 ## Description
 
-Lock-free thread-safe (single producer/single consumer) fixed-size shared queue.
-
 Queue algorithm is lock-free and for several cases wait-free.
 
 Selected solution is based on 2 independent preallocated queues - for producer and
