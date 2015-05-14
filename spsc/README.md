@@ -34,12 +34,12 @@ Running x64 Release exe on on Win7 Pro x64 SP1, CPU Core i7-4770 3.40 GHz:
 Empty queue latency (min): 0.00 microseconds (yep, QPC precision is not enough :-)
 Empty queue latency (med): 0.30 microseconds
 Empty queue latency (avg): 0.57 microseconds
-Empty queue latency (max): 15.70 microseconds
+Empty queue latency (max): 15.40 microseconds
 ```
 
 ```
-Queue input throughput:  4755711.24 ops/sec
-Queue output throughput: 4757074.51 ops/sec
+Queue input throughput:  6404480.93 ops/sec
+Queue output throughput: 6405051.45 ops/sec
 ```
 
-So the total performance is 9-10 million operations per second.
+So the total performance is ~12 million operations per second.
