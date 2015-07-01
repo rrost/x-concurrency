@@ -110,7 +110,7 @@ namespace queue_ut
       {
          // If we are in multithreading test we need to ensure that both producer and consumer
          // are not inside any queue update function. Barrier is used for this purpose.
-          if(wait_barrier)
+         if(wait_barrier)
          {
             wait_barrier->wait();
             queue.check_invariants();

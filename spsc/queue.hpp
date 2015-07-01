@@ -364,26 +364,26 @@ private:
       /// Constructs reentrance guard and sets protection flag.
       ///
       /// @throws std::runtime_error if reentrance detected.
-      reentrance_guard(reentrance_flag& reentranceFlag): m_reentranceFlag(reentranceFlag)
+      reentrance_guard(reentrance_flag& reentranceFlag): reentrance_flag_(reentranceFlag)
       {
-         if(m_reentranceFlag)
+         if(reentrance_flag_)
          {
             throw std::runtime_error("Reentrance not allowed. Only one thread at time "
                "can call enqueue() or dequeue()");
          }
-         m_reentranceFlag = true;
+         reentrance_flag_ = true;
       }
 
       /// Destructs reentrance guard and resets protection flag.
       ~reentrance_guard()
       {
-         m_reentranceFlag = false;
+         reentrance_flag_ = false;
       }
 
       reentrance_guard(const reentrance_guard&) = delete;
       reentrance_guard& operator=(const reentrance_guard&) = delete;
 
-      reentrance_flag& m_reentranceFlag; ///< Protection flag reference.
+      reentrance_flag& reentrance_flag_; ///< Protection flag reference.
    };
 
    /// Friend utility class giving UTs access to invariants checking.

@@ -23,15 +23,15 @@ namespace std_ex
       typedef std::chrono::time_point<high_resolution_clock> time_point;
       static const bool is_steady = true;
 
-      static long long getFrequency()
+      static long long get_frequency()
       {
-         static const long long s_frequency = []() -> long long
+         static const long long frequency = []() -> long long
          {
-            LARGE_INTEGER frequency;
-            QueryPerformanceFrequency(&frequency);
-            return frequency.QuadPart;
+            LARGE_INTEGER freq;
+            ::QueryPerformanceFrequency(&freq);
+            return freq.QuadPart;
          }();
-         return s_frequency;
+         return frequency;
       }
 
       static time_point now()
@@ -39,7 +39,7 @@ namespace std_ex
          LARGE_INTEGER count;
          QueryPerformanceCounter(&count);
          return time_point(
-             duration(count.QuadPart * static_cast<rep>(period::den) / getFrequency()));
+             duration(count.QuadPart * static_cast<rep>(period::den) / get_frequency()));
       }
    };
 }
