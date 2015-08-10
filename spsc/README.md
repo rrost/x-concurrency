@@ -17,7 +17,7 @@ simplier algorithm.
 
 ## Implementation Notes
 
-Project requires C++11 compiler (VS2013 or higher) and Boost 1.55.
+Project requires C++11 compiler (VS2013 or higher, gcc 4.8 or higher) and Boost 1.55.
 Please set BOOST environment variable to locate Boost library on your machine, e.g.
 set BOOST=C:\Libs\boost_1_55_0
 

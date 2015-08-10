@@ -332,7 +332,6 @@ namespace queue_ut
       queue<int> q(1);
 
       // Test dequeue reentrance
-
       // Start consumer 1 on empty queue, it would block
       std::thread consumer1([&](){ delete q.dequeue(); });
 
@@ -342,8 +341,12 @@ namespace queue_ut
       // Start consumer 2 on empty queue, it would throw
       std::thread consumer2([&](){ BOOST_CHECK_THROW(q.dequeue(), std::runtime_error); });
 
+      // Ensure consumer 2 is running and throwing
+      std::this_thread::sleep_for(std::chrono::milliseconds(10));
+
       // Release consumer 1 thread
       q.enqueue(new int(42));
+
       consumer1.join();
       consumer2.join();
 

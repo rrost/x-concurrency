@@ -1,26 +1,23 @@
 CXX=g++
-CPPFLAGS=-O3 -std=c++11 -Wall -pedantic
+CPPFLAGS=-O3 -std=c++11 -Wall -pedantic -I"$(BOOST)"
+LIB=-lpthread
 BINDIR=./bin
 OBJDIR=./obj
-SRC=%.cpp
 BIN=$(BINDIR)/spsc_queue_ut
-OBJ=$(OBJDIR)/%.o
+SRC=$(wildcard *.cpp)
+OBJ=$(patsubst %, $(OBJDIR)/%, $(patsubst %.cpp, %.o, $(SRC)))
 
-all: $(OBJ) $(BINDIR)
-	$(CXX) -o $(BIN) $^
+all: makedirs $(OBJ)
+	$(CXX) -o $(BIN) $(OBJ) $(LIB)
 
-.PHONY $(OBJDIR):
-$(OBJDIR):
-	mkdir $(OBJDIR)
+$(OBJ): obj/%.o: %.cpp
+	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -c -o $@ $<
 
-.PHONY $(BINDIR)
-$(BINDIR):
-	mkdir $(BINDIR)
+.PHONY: makedirs clean
 
-$(OBJ): $(SRC) $(OBJDIR)
-	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -c $<
+makedirs:
+	@mkdir -p $(BINDIR) $(OBJDIR)
 
-.PHONY clean
 clean:
-	rm -f $(OBJDIR)/*.o
-	rm -f $(BIN)
+	@rm -f $(OBJDIR)/*.o
+	@rm -f $(BIN)
