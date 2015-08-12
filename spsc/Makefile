@@ -1,5 +1,5 @@
 CXX=g++
-CPPFLAGS=-O3 -std=c++11 -Wall -pedantic -I"$(BOOST)"
+CPPFLAGS=-O3 -std=c++11 -Wall -pedantic -isystem"$(BOOST)"
 LIB=-lpthread
 BINDIR=./bin
 OBJDIR=./obj
