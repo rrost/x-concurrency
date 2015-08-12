@@ -169,6 +169,8 @@ namespace queue_ut
           std::ref(wait_barrier));
 
       // Give him a chance to fill the queue
+      // TODO: delays aren't reliable, used for simplicity only.
+      // Replace with correct synchronization!
       std::this_thread::sleep_for(std::chrono::milliseconds(100));
       BOOST_CHECK_EQUAL(q.count(), queue_size);
 
@@ -220,6 +222,8 @@ namespace queue_ut
       std::thread consumer(low_latency_consumer, std::ref(q), std::ref(end_point),
           std::ref(consumer_start_point));
 
+      // TODO: delays aren't reliable, used for simplicity only.
+      // Replace with correct synchronization!
       std::this_thread::sleep_for(std::chrono::milliseconds(10));
 
       // Start producer then
@@ -336,12 +340,16 @@ namespace queue_ut
       std::thread consumer1([&](){ delete q.dequeue(); });
 
       // Ensure consumer 1 is running and blocking
+      // TODO: delays aren't reliable, used for simplicity only.
+      // Replace with correct synchronization!
       std::this_thread::sleep_for(std::chrono::milliseconds(10));
 
       // Start consumer 2 on empty queue, it would throw
       std::thread consumer2([&](){ BOOST_CHECK_THROW(q.dequeue(), std::runtime_error); });
 
       // Ensure consumer 2 is running and throwing
+      // TODO: delays aren't reliable, used for simplicity only.
+      // Replace with correct synchronization!
       std::this_thread::sleep_for(std::chrono::milliseconds(10));
 
       // Release consumer 1 thread
@@ -361,6 +369,8 @@ namespace queue_ut
       std::thread producer1([&](){ q.enqueue(new int(42)); });
 
       // Ensure producer 1 is running and blocking
+      // TODO: delays aren't reliable, used for simplicity only.
+      // Replace with correct synchronization!
       std::this_thread::sleep_for(std::chrono::milliseconds(10));
 
       // Start producer 2 on full queue, it would throw
@@ -370,6 +380,11 @@ namespace queue_ut
             std::unique_ptr<int> p(new int(42));
             BOOST_CHECK_THROW(q.enqueue(p.get()), std::runtime_error);
          });
+
+      // Ensure producer 2 is running and throwing
+      // TODO: delays aren't reliable, used for simplicity only.
+      // Replace with correct synchronization!
+      std::this_thread::sleep_for(std::chrono::milliseconds(10));
 
       // Release producer 1 thread
       delete q.dequeue();
@@ -459,6 +474,8 @@ namespace queue_ut
       std::thread consumer(throughput_consumer, std::ref(q), std::ref(stop), std::ref(deq_count),
          std::ref(consumer_start), std::ref(consumer_end));
 
+      // TODO: delays aren't reliable, used for simplicity only.
+      // Replace with correct synchronization!
       std::this_thread::sleep_for(std::chrono::seconds(1));
       stop = true;
 
