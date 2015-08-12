@@ -93,7 +93,7 @@ namespace queue_ut
          BOOST_CHECK_EQUAL(q.count(), count);
          invariants_checker::check(q);
 
-         for(auto i = 0; i < count; ++i)
+         for(auto i = 0u; i < count; ++i)
          {
             smart_ptr p(q.dequeue());
             BOOST_CHECK_EQUAL(*p, vals[i]);
@@ -107,7 +107,7 @@ namespace queue_ut
       const auto delete_count = 10u;
       {
          queue<delete_counter> q(delete_count);
-         for(auto i = 0; i < delete_count; ++i)
+         for(auto i = 0u; i < delete_count; ++i)
          {
             q.enqueue(new delete_counter());
          }
@@ -440,8 +440,7 @@ namespace queue_ut
       start = clock::now();
       for(;;)
       {
-         const auto p = queue.dequeue();
-         p;
+         queue.dequeue();
          ++opCount;
 
          if(opCount % 1000 == 0 && stop)
