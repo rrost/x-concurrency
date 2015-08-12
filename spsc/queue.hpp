@@ -22,7 +22,7 @@
 
 // Check Boost version. We need at least 1.55 to run properly.
 #if BOOST_VERSION < 105500
-#error This code has been developed and tested with Boost 1.55. It's not guaranteed to compile and run with earlier Boost versions.
+#error This code has been developed and tested with Boost 1.55. Not guaranteed to compile and run with earlier Boost versions.
 #endif
 
 namespace xcon
